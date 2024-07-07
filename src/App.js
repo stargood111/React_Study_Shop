@@ -10,8 +10,10 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 // useNavigate = Link 와 같으나 a태그를 없애주고 -1,-2 +1 같은 기능이 있음
 // Outlet 원하는 404페이지 같은 경로 설정 가능
 import Detail from './pages/Detail.js'
+import Cart from './pages/Cart.js'
 import styled from 'styled-components'
 import axios from "axios";
+
 
 function App(){
 
@@ -54,6 +56,7 @@ function App(){
               }>
               </Route>
               <Route path="/detail/:id" element={<Detail shoes={shoes}/>}></Route>
+              <Route path="/cart" element={<Cart/>}></Route>
               {/*<Route path="/*" element={<div>잘못된 경로입니다.</div>}></Route>*/}
               {/*<Route path="about" element={<div>어바웃페이지</div>}></Route> //Outlet Hook*/}
               <Route path="/about" element={<About/>}>
@@ -78,6 +81,7 @@ function App(){
           }}}>더보기
           </button> : null }
       </div>
+
   )
 }
 
