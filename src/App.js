@@ -42,6 +42,7 @@ function App(){
           <Link to="/">Home</Link>&nbsp;&nbsp;&nbsp;
           <Link to="/detail">Detail</Link>&nbsp;&nbsp;&nbsp;
           <Link to="/about">About</Link>&nbsp;&nbsp;&nbsp;
+          <Link to="/cart">Cart</Link>&nbsp;&nbsp;&nbsp;
           <Routes>
               <Route path="/" element={
                   <>

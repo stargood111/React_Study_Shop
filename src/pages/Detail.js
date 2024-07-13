@@ -1,6 +1,8 @@
 import {Route, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
+import {useDispatch, useSelector} from "react-redux";
+import {plusinitialState, dupButton} from "../store.js"
 
 const Detail = (props) => {
     let [test, setTest] = useState(1);
@@ -13,7 +15,7 @@ const Detail = (props) => {
     let [load, setLoad] = useState('');
     useEffect(() => {
         if(isNaN(warning) == true){
-            alert('그러지마세요')
+            alert('숫자만 입력하세요')
         }
     }, [warning]);
 
@@ -24,6 +26,7 @@ const Detail = (props) => {
         })
     },[]);
 
+    let dispatch = useDispatch()
 
     return(
         <div className={"container start " + load}>
@@ -37,9 +40,10 @@ const Detail = (props) => {
                 </div>
                 <div className="col-md-6">
                 <h4 className="pt-5">{props.shoes[id].title}</h4>
-    <p>상품설명</p>
-    <p>120000원</p>
-    <button className="btn btn-danger">주문하기</button>
+                <p>{props.shoes[id].content}</p>
+                <p>{props.shoes[id].price}</p>
+    <button className="btn btn-danger"
+            onClick={()=>{dispatch(plusinitialState( {id: 1, name : 'Grey Yordan'}))}}>주문하기</button>
 </div>
                     <Nav variant="tabs"  defaultActiveKey="link1">
                         <Nav.Item>

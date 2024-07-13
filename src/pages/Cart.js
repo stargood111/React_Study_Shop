@@ -1,6 +1,8 @@
 import { Table } from 'react-bootstrap'
 import {useDispatch, useSelector} from "react-redux";
-import {changeName,changeAge} from "../store";
+import {changeName,changeAge} from "../store/userSlice.js";
+import {plusButton, subButton} from "../store.js"
+import styled from "styled-components";
 
 
 const Cart = () => {
@@ -11,15 +13,16 @@ const Cart = () => {
     //     useSelector((state)=>{
     //         return state.user}) //redux 가져오기
     //     console.log(a)
-    console.log(state.user.age)
+    // console.log(state.user.age)
 
     let dispatch = useDispatch() //redux store 함수 가져와 쓰기
 
     return (
         <div>
+
             <h6> {state.user.name} {state.user.age}의 바구니</h6>
             <button onClick={()=>{
-                dispatch(changeAge())
+                dispatch(changeAge(100))
             }}>버튼</button>
             <Table>
                 <thead>
@@ -28,19 +31,22 @@ const Cart = () => {
                     <th>상품명</th>
                     <th>수량</th>
                     <th>변경하기</th>
+                    <th>삭제</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    state.product.map((a)=>{
+                    state.product.map((a,i)=>{
                         return (
                             <tr>
                                 <td>{a.id}</td>
                                 <td>{a.name}</td>
                                 <td>{a.count}</td>
                                 <td><button onClick={()=>{
-                                    dispatch(changeName())
+                                    dispatch(plusButton(a.id));
                                 }}>+</button></td>
+                                <td style={{fontSize: '25px', fontStyle:"bold"}}
+                                    onClick={()=>{dispatch(subButton(a.id))}}>-</td>
                             </tr>
                         )
                     })
