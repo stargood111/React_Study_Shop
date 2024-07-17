@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import data from './data.js';
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 // useNavigate = Link 와 같으나 a태그를 없애주고 -1,-2 +1 같은 기능이 있음
@@ -17,11 +17,17 @@ import axios from "axios";
 
 function App(){
 
+
   let [shoes, setShoes] = useState(data);
   let [shoes2, setShoes2] = useState()
   let navigate = useNavigate();
   let [click, setClick] = useState(0);
   let [click2 ,setClick2] =useState(true);
+
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify([]))
+    }, []);
+
   return (
       <div>
 
@@ -91,9 +97,11 @@ const Modal = (props) => {
         <>
             {props.shoes.map((shoes, i) => (
                 <div key={i} className="col-md-4">
+                    <Link to ={"/detail/" + i}>
                     <img src={`https://codingapple1.github.io/shop/shoes${i + 1}.jpg`} width="80%"/>
                     <h4>{props.shoes[i].title}</h4>
                     <p>{props.shoes[i].price}</p>
+                    </Link>
                 </div>
             ))}
         </>

@@ -1,4 +1,4 @@
-import {Route, useParams} from "react-router-dom";
+import {json, Route, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
 import {useDispatch, useSelector} from "react-redux";
@@ -13,6 +13,20 @@ const Detail = (props) => {
     let [box, setBox] = useState(false);
     let [tab, setTab] = useState(0);
     let [load, setLoad] = useState('');
+
+    let product = props.shoes.find(x => x.id == id);
+
+
+
+    useEffect(() => {
+        let a = localStorage.getItem('data')
+        a = JSON.parse(a)
+        a.push(product.id)
+        a = new Set(a)
+        a = Array.from(a)
+        localStorage.setItem('data',JSON.stringify(a))
+    }, []);
+
     useEffect(() => {
         if(isNaN(warning) == true){
             alert('숫자만 입력하세요')
