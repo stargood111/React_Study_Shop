@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
 import {useDispatch, useSelector} from "react-redux";
 import {plusinitialState, dupButton} from "../store.js"
+import {useLike} from "../hooks/like";
+import {useAxios} from "../hooks/customAxios";
 
 const Detail = (props) => {
     let [test, setTest] = useState(1);
@@ -15,7 +17,6 @@ const Detail = (props) => {
     let [load, setLoad] = useState('');
 
     let product = props.shoes.find(x => x.id == id);
-
 
 
     useEffect(() => {
@@ -36,11 +37,13 @@ const Detail = (props) => {
     useEffect(() => {
         setLoad("end")
         return(()=>{
-            setLoad("")
+            setLoad(           "")
         })
     },[]);
 
     let dispatch = useDispatch()
+    let [like, addLike] = useLike();
+    let [response, axois123] = useAxios();
 
     return(
         <div className={"container start " + load}>
@@ -53,12 +56,14 @@ const Detail = (props) => {
                     <img src={`https://codingapple1.github.io/shop/shoes${parseInt(id) + 1}.jpg`} width="100%"/>
                 </div>
                 <div className="col-md-6">
+                    {like} <span onClick={addLike}>좋아요</span>
+                    {response} <span onClick={axois123}>axios</span>
                 <h4 className="pt-5">{props.shoes[id].title}</h4>
                 <p>{props.shoes[id].content}</p>
                 <p>{props.shoes[id].price}</p>
-    <button className="btn btn-danger"
-            onClick={()=>{dispatch(plusinitialState( {id: 1, name : 'Grey Yordan'}))}}>주문하기</button>
-</div>
+                    <button className="btn btn-danger"
+                            onClick={()=>{dispatch(plusinitialState( {id: 1, name : 'Grey Yordan'}))}}>주문하기</button>
+                </div>
                     <Nav variant="tabs"  defaultActiveKey="link1">
                         <Nav.Item>
                             <Nav.Link eventKey="link0" onClick={()=>{setTab(0)}}>버튼0</Nav.Link>
